@@ -20,14 +20,14 @@ async def test_command(ctx):
 async def test_command2(ctx):
     await ctx.send(f'Oh my')
 
-@bot.command(name="ask")
+@bot.command(name="ask", aliases=["chat"])
 async def chat_command(ctx: commands.Context, *, phrase: str) -> None:
-    Answer = chat(model="llama3.2", messages=[
+    Answer = chat(model="gemma2", messages=[
         {"role": "user", "content": phrase}
     ])
-    await ctx.send(Answer["message"]["content"])
+    await ctx.send(Answer["message"]["content"][:500])
     print(Answer["message"]["content"])
-    await ctx.send("Did you find me helpful?")
+    # await ctx.send("Did you find me helpful?")
 
 @bot.command(name="simple")
 async def echo(ctx: commands.Context, *, phrase: str) -> None:
